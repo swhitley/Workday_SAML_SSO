@@ -1,5 +1,5 @@
 
-Workday SAML SSO
+Workday* SAML SSO
 ==================
 
 
@@ -29,3 +29,7 @@ Operations
 Once running, a user who visits the web site will be redirected to Workday and will automatically log in.
 Each user can visit the /setup page of the website and configure the login as needed.  Some users
 may want to login using a password rather than go straight into Workday.  The password option is used to prevent a casual user from auto-logging in to Workday, but the /setup page does not have additional security by default.  You may want to setup basic auth on the /setup page.
+
+
+
+* This code has not been endorsed by Workday and no Workday developers contribute to this code...although they are welcome to.

@@ -109,3 +109,4 @@ UpgradeLog*.XML
 *Thumbs.db
 UserFiles*/
 *.ignore
+keys/makecert.exe

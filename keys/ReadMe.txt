@@ -1,7 +1,18 @@
 This process is designed to produce a PFX file and the corresponding PEM file for use with Workday SAML SSO.
 
-Sample files have been created and exist in this directory.  They should not be used with your Workday tenant as you would be
-vulnerable to anyone else with this code.  Create your own files using the instructions below.
+The process requires makecert.exe, which is part of the Windows SDK and can be downloaded from Microsoft.
+(You may already have this file from Visual Studio or a previous SDK install.)
+
+http://msdn.microsoft.com/en-us/library/windows/desktop/aa386968(v=vs.85).aspx
+
+
+Common makecert.exe location:  %ProgramFiles% or %ProgramFiles(x86) \Windows Kits\{version}\bin\{processor}
+
+
+**Copy makecert.exe into the /keys directory**
+
+
+Sample files have been created and exist in this directory.  They should not be used with your Workday tenant as you would be vulnerable to anyone else with this code.  Create your own files using the instructions below.
 
 Once you create your own files:
 
