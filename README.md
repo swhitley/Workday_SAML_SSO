@@ -32,4 +32,4 @@ may want to login using a password rather than go straight into Workday.  The pa
 
 
 
-* This code has not been endorsed by Workday and no Workday developers contribute to this code...although they are welcome to.
+<nowiki>*</nowiki> This code has not been endorsed by Workday and no Workday developers contribute to this code...although they are welcome to.
