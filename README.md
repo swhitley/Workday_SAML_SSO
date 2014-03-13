@@ -6,7 +6,7 @@ Workday* SAML SSO
 General
 -------
 
-This is a starter project for creating a SAML solution for Workday.  The code is fully functional, but you may need to add additional error handling and adapt the stylesheets for your environment.  It works for internal connections only (not over the Internet).  The project features multi-tenant access, impersonation, and user-configurable options for network password authentication. 
+This is an ASP.NET (C#) starter project for creating a SAML solution for Workday.  The code is fully functional, but you may need to add additional error handling and adapt the look-and-feel for your environment.  It works for internal connections only (not over the Internet).  The project features multi-tenant access, impersonation, and user-configurable options for network password authentication. 
 
 Although this was designed to work with Workday, it should be a suitable project for other applications that use SAML 2.0. 
 
@@ -22,13 +22,15 @@ Look in the /keys directory for information on generating the required public/pr
 
 It is very important to import the certificate into the local machine certificate store (not the current user's).  This is further addressed in the /keys readme file.
 
+Windows Authentication is used by default and should be enabled on the web site where this application is installed.
+
 
 Operations
 ----------
 
 Once running, a user who visits the web site will be redirected to Workday and will automatically log in.
 Each user can visit the /setup page of the website and configure the login as needed.  Some users
-may want to login using a password rather than go straight into Workday.  The password option is used to prevent a casual user from auto-logging in to Workday, but the /setup page does not have additional security by default.  You may want to setup basic auth on the /setup page.
+may want to login using a password rather than go straight into Workday. 
 
 
 

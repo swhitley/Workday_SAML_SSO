@@ -10,19 +10,25 @@ namespace Workday_SAML_SSO.Setup
 {
     public partial class Default : System.Web.UI.Page
     {
-        protected string sUsername = "";
+        protected string username = "";
         protected string login_file = "";
         protected string bypass_file = "";
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            sUsername = User.Identity.Name.Split('\\')[1].ToLower();
+            //Use a session variable to force a separate login.
+            if (Session["username"] == null)
+            {
+                Response.Redirect("~/login.aspx?page=setup");
+            }
+
+            username = Session["username"].ToString();
 
             //If this file exists, the user is required to login using a network id and password.
-            login_file = Server.MapPath(".") + "\\UserFiles\\" + sUsername + "_login.txt";
+            login_file = Server.MapPath(".") + "\\UserFiles\\" + username + "_login.txt";
 
             //If this file exists, the user will be redirected to Workday.
-            bypass_file = Server.MapPath(".") + "\\UserFiles\\" + sUsername + "_bypass.txt";
+            bypass_file = Server.MapPath(".") + "\\UserFiles\\" + username + "_bypass.txt";
 
             if (!IsPostBack)
             {
@@ -61,6 +67,9 @@ namespace Workday_SAML_SSO.Setup
             {
                 File.WriteAllText(bypass_file, "");
             }
+
+            //Clear the session variable
+            Session.Remove("username");
 
             Response.Redirect("../");
 

@@ -49,40 +49,51 @@ namespace Workday_SAML_SSO
             bool isValid = false;
             string domain = ConfigurationManager.AppSettings["network_domain"];
 
+            //Check the network username and password
             using (PrincipalContext pc = new PrincipalContext(ContextType.Domain, domain))
             {
                 isValid = pc.ValidateCredentials(txtUsername.Value, txtPassword.Value, ContextOptions.Negotiate);
             }
 
+
             if (isValid)
             {
                 string sUsername = txtUsername.Value;
 
-                //Create a SAML 2.0 Response with the network username of the authenticating user.
-                var samlResponse = SamlResponse.CreateSamlResponse(
-                  ConfigurationManager.AppSettings[tenant + "recipient"]
-                , ConfigurationManager.AppSettings[tenant + "issuer"]
-                , ConfigurationManager.AppSettings[tenant + "domain"]
-                , sUsername
-                , ConfigurationManager.AppSettings[tenant + "cert_issuer_name"]
-                , ConfigurationManager.AppSettings[tenant + "target"]);
-
-                form1.Action = ConfigurationManager.AppSettings[tenant + "recipient"];
-                RelayState.Value = ConfigurationManager.AppSettings[tenant + "target"];
-                SAMLResponse.Value = samlResponse;
-
-                if (Request["link"] != null)
+                //Did request come from the setup page?
+                if (Request["page"] != null && Request["page"] == "setup")
                 {
-                    RelayState.Value = Request["link"];
+                    Session["username"] = sUsername;
+                    Response.Redirect("~/setup");
                 }
+                else
+                {
+                    //Create a SAML 2.0 Response with the network username of the authenticating user.
+                    var samlResponse = SamlResponse.CreateSamlResponse(
+                      ConfigurationManager.AppSettings[tenant + "recipient"]
+                    , ConfigurationManager.AppSettings[tenant + "issuer"]
+                    , ConfigurationManager.AppSettings[tenant + "domain"]
+                    , sUsername
+                    , ConfigurationManager.AppSettings[tenant + "cert_issuer_name"]
+                    , ConfigurationManager.AppSettings[tenant + "target"]);
 
-                String scriptText = "";
-                scriptText += "function submitForm(){";
-                scriptText += "   document.getElementById('form1').submit(); ";
-                scriptText += "}";
-                scriptText += "submitForm();";
-                ClientScript.RegisterStartupScript(this.GetType(),
-                   "SubmitScript", scriptText, true);
+                    form1.Action = ConfigurationManager.AppSettings[tenant + "recipient"];
+                    RelayState.Value = ConfigurationManager.AppSettings[tenant + "target"];
+                    SAMLResponse.Value = samlResponse;
+
+                    if (Request["link"] != null)
+                    {
+                        RelayState.Value = Request["link"];
+                    }
+
+                    String scriptText = "";
+                    scriptText += "function submitForm(){";
+                    scriptText += "   document.getElementById('form1').submit(); ";
+                    scriptText += "}";
+                    scriptText += "submitForm();";
+                    ClientScript.RegisterStartupScript(this.GetType(),
+                       "SubmitScript", scriptText, true);
+                }
             }
 
         }
