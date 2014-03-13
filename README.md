@@ -22,6 +22,8 @@ Look in the /keys directory for information on generating the required public/pr
 
 It is very important to import the certificate into the local machine certificate store (not the current user's).  This is further addressed in the /keys readme file.
 
+Enable SAML in your Workday tenant. -- https://community.workday.com/doc/sec/dan1370796470811
+
 Windows Authentication is used by default and should be enabled on the web site where this application is installed.
 
 
