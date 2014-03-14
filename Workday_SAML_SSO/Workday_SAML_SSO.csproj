@@ -80,9 +80,9 @@
     <Content Include="Default.aspx" />
     <Content Include="Error.aspx" />
     <Content Include="img\bg.png" />
+    <Content Include="img\signon.png" />
     <Content Include="Login.aspx" />
     <Content Include="Setup\Default.aspx" />
-    <None Include="Web.config.2.ignore" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Default.aspx.cs">
